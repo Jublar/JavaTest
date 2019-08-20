@@ -20,8 +20,4 @@ public class Variations {
         // This is the result of processing an input array of ["a", "b"]
         return new String[]{"a", "ab", "b", "ba"};
     }
-
-    private static void printResults() {
-
-    }
 }
