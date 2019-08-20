@@ -1,2 +1,2 @@
 rootProject.name = 'JavaTest'
-include 'calc-change', 'potato-farm', 'kenect-spring-test-1'
+include 'calc-change', 'kenect-spring-test-1', 'potato-farm', 'variations'
