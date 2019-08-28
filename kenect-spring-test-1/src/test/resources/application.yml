@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:file:./data/kenect-spring-test1-db
+    url: jdbc:h2:file:./data/kenect-spring-test1-unit-test-db
     driver-class-name: org.h2.Driver
     username: sa
     password: password
@@ -9,7 +9,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
         hbm2ddl:
-          auto: update
+          auto: create
   jackson:
     default-property-inclusion: non_null
   hateoas:
