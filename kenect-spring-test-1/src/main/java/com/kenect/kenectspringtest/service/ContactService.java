@@ -1,5 +1,6 @@
 package com.kenect.kenectspringtest.service;
 
+import com.kenect.kenectspringtest.constants.Constants;
 import com.kenect.kenectspringtest.exception.ElementNotFoundException;
 import com.kenect.kenectspringtest.model.Contact;
 import com.kenect.kenectspringtest.repository.ContactRepository;
@@ -47,7 +48,7 @@ public class ContactService implements IContactService {
     @Override
     public Contact getById(Long id) {
         Optional<Contact> optionalContact = contactRepository.findById(id);
-        return optionalContact.orElseThrow(() -> new ElementNotFoundException("There is no element with id: " + id));
+        return optionalContact.orElseThrow(() -> new ElementNotFoundException(String.format(Constants.MSG_NO_ELEMENT, id)));
     }
 
     /** {@inheritDoc} */

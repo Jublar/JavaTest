@@ -1,6 +1,7 @@
 package com.kenect.kenectspringtest.controller;
 
 import com.kenect.kenectspringtest.AbstractTest;
+import com.kenect.kenectspringtest.constants.Constants;
 import com.kenect.kenectspringtest.dto.SearchPayLoad;
 import com.kenect.kenectspringtest.model.Contact;
 import com.kenect.kenectspringtest.testmodel.Contacts;
@@ -79,14 +80,15 @@ public class ContactRestControllerTest extends AbstractTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
         Contact contactDB = super.mapFromJson(mvcResult.getResponse().getContentAsString(), Contact.class);
 
-        String getContactsUri = String.format("/contacts/%d", contactDB.getId() + 1);
+        Long idToFound = contactDB.getId() + 1;
+        String getContactsUri = String.format("/contacts/%d", idToFound);
         mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(getContactsUri)
                 .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
         int status = mvcResult.getResponse().getStatus();
         assertEquals(404, status);
         String content = mvcResult.getResponse().getContentAsString();
-        assertEquals(String.format("There is no element with id: %d" , contactDB.getId() + 1), content);
+        assertEquals(String.format(Constants.MSG_NO_ELEMENT, idToFound), content);
 
         String deleteUri = String.format("/contacts/%d", contactDB.getId());
         mockMvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();

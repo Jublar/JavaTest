@@ -1,5 +1,6 @@
 package com.kenect.kenectspringtest.service;
 
+import com.kenect.kenectspringtest.constants.Constants;
 import com.kenect.kenectspringtest.exception.InvalidInputException;
 import com.kenect.kenectspringtest.model.Address;
 import com.kenect.kenectspringtest.repository.AddressRepository;
@@ -32,9 +33,9 @@ public class AddressService extends BaseService<Address, Long> {
     @Override
     public Address save(Address address) {
         if (address == null)
-            throw new InvalidInputException("Address object is required");
+            throw new InvalidInputException(Constants.MSG_ADDRESS_OBJECT_REQUIRED);
         if (address.getStreet() == null || StringUtils.isEmpty(address.getStreet()))
-            throw new InvalidInputException("Street is required");
+            throw new InvalidInputException(Constants.MSG_STREET_REQUIRED);
         return super.save(address);
     }
 }

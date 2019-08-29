@@ -1,5 +1,6 @@
 package com.kenect.kenectspringtest.service;
 
+import com.kenect.kenectspringtest.constants.Constants;
 import com.kenect.kenectspringtest.exception.InvalidInputException;
 import com.kenect.kenectspringtest.model.EmailAddress;
 import com.kenect.kenectspringtest.repository.EmailRepository;
@@ -35,11 +36,11 @@ public class EmailService extends BaseService<EmailAddress, Long> {
     @Override
     public EmailAddress save(EmailAddress emailAddress) {
         if (emailAddress == null)
-            throw new InvalidInputException("Email object is required");
+            throw new InvalidInputException(Constants.MSG_EMAIL_OBJECT_REQUIRED);
         if (emailAddress.getEmail() == null || StringUtils.isEmpty(emailAddress.getEmail()))
-            throw new InvalidInputException("Email is required");
+            throw new InvalidInputException(Constants.MSG_EMAIL_REQUIRED);
         if (!validateEmailAddress(emailAddress.getEmail()))
-            throw new InvalidInputException("Email format not correct");
+            throw new InvalidInputException(Constants.MSG_EMAIL_FORMAT);
         return super.save(emailAddress);
     }
 

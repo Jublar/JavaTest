@@ -1,5 +1,6 @@
 package com.kenect.kenectspringtest.service;
 
+import com.kenect.kenectspringtest.constants.Constants;
 import com.kenect.kenectspringtest.exception.InvalidInputException;
 import com.kenect.kenectspringtest.model.Phone;
 import com.kenect.kenectspringtest.repository.PhoneRepository;
@@ -35,11 +36,11 @@ public class PhoneService extends BaseService<Phone, Long> {
     @Override
     public Phone save(Phone phone) {
         if (phone == null)
-            throw new InvalidInputException("Phone object is required");
+            throw new InvalidInputException(Constants.MSG_PHONE_OBJECT_REQUIRED);
         if (phone.getNumber() == null || StringUtils.isEmpty(phone.getNumber()))
-            throw new InvalidInputException("Phone number is required");
+            throw new InvalidInputException(Constants.MSG_NUMBER_REQUIRED);
         if (!validatePhone(phone.getNumber()))
-            throw new InvalidInputException("Phone number format not correct");
+            throw new InvalidInputException(Constants.MSG_NUMBER_FORMAT);
         return super.save(phone);
     }
 
