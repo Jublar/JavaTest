@@ -27,12 +27,12 @@ public class ContactRestController {
 
     private IContactService contactService;
 
-    @Autowired
     /**
      * <p>Constructor for ContactRestController.</p>
      *
      * @param contactService a {@link com.kenect.kenectspringtest.service.IContactService} object.
      */
+    @Autowired
     public ContactRestController(IContactService contactService) {
         this.contactService = contactService;
     }

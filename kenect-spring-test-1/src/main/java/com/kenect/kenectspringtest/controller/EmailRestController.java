@@ -27,13 +27,13 @@ public class EmailRestController {
     private IContactService contactService;
     private IAddressElementService<EmailAddress, Long> emailService;
 
-    @Autowired
     /**
      * <p>Constructor for EmailRestController.</p>
      *
      * @param contactService a {@link com.kenect.kenectspringtest.service.IContactService} object.
      * @param emailService a {@link com.kenect.kenectspringtest.service.IAddressElementService} object.
      */
+    @Autowired
     public EmailRestController(IContactService contactService, IAddressElementService<EmailAddress, Long> emailService) {
         this.contactService = contactService;
         this.emailService = emailService;
