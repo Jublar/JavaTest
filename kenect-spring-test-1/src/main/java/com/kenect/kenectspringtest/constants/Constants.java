@@ -23,8 +23,8 @@ public class Constants {
     public static final String MSG_STREET_REQUIRED = "Street is required.";
     /** Constant <code>MSG_PHONE_OBJECT_REQUIRED="Phone object is required."</code> */
     public static final String MSG_PHONE_OBJECT_REQUIRED = "Phone object is required.";
-    /** Constant <code>MSG_NUMBER_OBJECT_REQUIRED="Phone number is required."</code> */
-    public static final String MSG_NUMBER_OBJECT_REQUIRED = "Phone number is required.";
+    /** Constant <code>MSG_NUMBER_REQUIRED="Phone number is required."</code> */
+    public static final String MSG_NUMBER_REQUIRED = "Phone number is required.";
     /** Constant <code>MSG_NUMBER_FORMAT="Phone number format not correct."</code> */
     public static final String MSG_NUMBER_FORMAT = "Phone number format not correct.";
 }
