@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * <p>ElementNotFoundAdvice class.</p>
+ *
+ * @author Jublar Garcia
+ * @version 1.0
+ */
 @ControllerAdvice
 public class ElementNotFoundAdvice {
 

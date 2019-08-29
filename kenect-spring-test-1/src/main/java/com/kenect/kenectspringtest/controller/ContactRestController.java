@@ -16,16 +16,32 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.core.DummyInvocationUtils.methodOn;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+/**
+ * <p>ContactRestController class.</p>
+ *
+ * @author Jublar Garcia
+ * @version 1.0
+ */
 @RestController
 public class ContactRestController {
 
     private IContactService contactService;
 
     @Autowired
+    /**
+     * <p>Constructor for ContactRestController.</p>
+     *
+     * @param contactService a {@link com.kenect.kenectspringtest.service.IContactService} object.
+     */
     public ContactRestController(IContactService contactService) {
         this.contactService = contactService;
     }
 
+    /**
+     * <p>contacts.</p>
+     *
+     * @return a {@link org.springframework.hateoas.Resources} object.
+     */
     @GetMapping(value = "/contacts")
     public Resources<Resource<Contact>> contacts() {
         List<Resource<Contact>> contacts = contactService.getAllContacts().stream()
@@ -40,6 +56,12 @@ public class ContactRestController {
                 linkTo(methodOn(ContactRestController.class).contacts()).withSelfRel());
     }
 
+    /**
+     * <p>contactById.</p>
+     *
+     * @param id a {@link java.lang.Long} object.
+     * @return a {@link org.springframework.hateoas.Resource} object.
+     */
     @GetMapping("/contacts/{id}")
     public Resource<Contact> contactById(@PathVariable Long id) {
         Contact contact = contactService.getById(id);
@@ -51,6 +73,12 @@ public class ContactRestController {
                 linkTo(methodOn(ContactRestController.class).contacts()).withRel("contacts"));
     }
 
+    /**
+     * <p>contacts.</p>
+     *
+     * @param search a {@link com.kenect.kenectspringtest.dto.SearchPayLoad} object.
+     * @return a {@link org.springframework.hateoas.Resources} object.
+     */
     @PostMapping(value = "/contacts/search")
     public Resources<Resource<Contact>> contacts(@RequestBody SearchPayLoad search) {
         List<Resource<Contact>> contacts = contactService.getAllContacts(search.getQuery()).stream()
@@ -62,6 +90,12 @@ public class ContactRestController {
                 linkTo(methodOn(ContactRestController.class).contacts()).withSelfRel());
     }
 
+    /**
+     * <p>saveContact.</p>
+     *
+     * @param contact a {@link com.kenect.kenectspringtest.model.Contact} object.
+     * @return a {@link org.springframework.hateoas.Resource} object.
+     */
     @PostMapping(value = "/contacts")
     public Resource<Contact> saveContact(@RequestBody Contact contact) {
         Contact contactDB = contactService.save(contact);
@@ -70,6 +104,12 @@ public class ContactRestController {
                 linkTo(methodOn(ContactRestController.class).contacts()).withRel("contacts"));
     }
 
+    /**
+     * <p>updateContact.</p>
+     *
+     * @param contact a {@link com.kenect.kenectspringtest.model.Contact} object.
+     * @return a {@link org.springframework.hateoas.Resource} object.
+     */
     @PutMapping(value = "/contacts")
     public Resource<Contact> updateContact(@RequestBody Contact contact) {
         Contact contactDB = contactService.save(contact);
@@ -78,6 +118,12 @@ public class ContactRestController {
                 linkTo(methodOn(ContactRestController.class).contacts()).withRel("contacts"));
     }
 
+    /**
+     * <p>delete.</p>
+     *
+     * @param id a {@link java.lang.Long} object.
+     * @return a {@link org.springframework.http.ResponseEntity} object.
+     */
     @DeleteMapping(value = "/contacts/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         contactService.delete(id);

@@ -8,8 +8,20 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * <p>ContactRepository interface.</p>
+ *
+ * @author Jublar Garcia
+ * @version 1.0
+ */
 @Repository
 public interface ContactRepository extends CrudRepository<Contact, Long> {
+    /**
+     * <p>findByQuery.</p>
+     *
+     * @param query a {@link java.lang.String} object.
+     * @return a {@link java.util.List} object.
+     */
     @Query("SELECT c FROM Contact c " +
             "left join Address a on a.contact.id = c.id " +
             "left join EmailAddress e on e.contact.id = c.id " +

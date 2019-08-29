@@ -7,16 +7,28 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * <p>AddressService class.</p>
+ *
+ * @author Jublar Garcia
+ * @version 1.0
+ */
 @Service
 public class AddressService extends BaseService<Address, Long> {
 
     private AddressRepository addressRepository;
 
+    /**
+     * <p>Constructor for AddressService.</p>
+     *
+     * @param addressRepository a {@link com.kenect.kenectspringtest.repository.AddressRepository} object.
+     */
     @Autowired
     public AddressService(AddressRepository addressRepository) {
         this.repository = addressRepository;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Address save(Address address) {
         if (address == null)

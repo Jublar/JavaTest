@@ -10,38 +10,54 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * <p>ContactService class.</p>
+ *
+ * @author Jublar Garcia
+ * @version 1.0
+ */
 @Service
 public class ContactService implements IContactService {
 
     private ContactRepository contactRepository;
 
+    /**
+     * <p>Constructor for ContactService.</p>
+     *
+     * @param contactRepository a {@link com.kenect.kenectspringtest.repository.ContactRepository} object.
+     */
     @Autowired
     public ContactService(ContactRepository contactRepository) {
         this.contactRepository = contactRepository;
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Contact> getAllContacts() {
         return (List<Contact>) contactRepository.findAll();
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Contact> getAllContacts(String query) {
         return (List<Contact>) contactRepository.findByQuery(query);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Contact getById(Long id) {
         Optional<Contact> optionalContact = contactRepository.findById(id);
         return optionalContact.orElseThrow(() -> new ElementNotFoundException("There is no element with id: " + id));
     }
 
+    /** {@inheritDoc} */
     @Override
     @Transactional
     public Contact save(Contact contact) {
         return contactRepository.save(contact);
     }
 
+    /** {@inheritDoc} */
     @Override
     @Transactional
     public void delete(Long id) {

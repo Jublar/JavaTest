@@ -15,6 +15,12 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.core.DummyInvocationUtils.methodOn;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+/**
+ * <p>PhoneRestController class.</p>
+ *
+ * @author Jublar Garcia
+ * @version 1.0
+ */
 @RestController
 public class PhoneRestController {
 
@@ -22,11 +28,23 @@ public class PhoneRestController {
     private IAddressElementService<Phone, Long> phoneService;
 
     @Autowired
+    /**
+     * <p>Constructor for PhoneRestController.</p>
+     *
+     * @param contactService a {@link com.kenect.kenectspringtest.service.IContactService} object.
+     * @param phoneService a {@link com.kenect.kenectspringtest.service.IAddressElementService} object.
+     */
     public PhoneRestController(IContactService contactService, IAddressElementService<Phone, Long> phoneService) {
         this.contactService = contactService;
         this.phoneService = phoneService;
     }
 
+    /**
+     * <p>getPhones.</p>
+     *
+     * @param id a {@link java.lang.Long} object.
+     * @return a {@link org.springframework.hateoas.Resources} object.
+     */
     @GetMapping(value = "/contacts/{id}/phones")
     public Resources<Resource<Phone>> getPhones(@PathVariable Long id) {
         List<Resource<Phone>> phones = phoneService.getAllElements(id).stream()
@@ -38,6 +56,13 @@ public class PhoneRestController {
                 linkTo(methodOn(PhoneRestController.class).getPhones(id)).withSelfRel());
     }
 
+    /**
+     * <p>getPhone.</p>
+     *
+     * @param contactId a {@link java.lang.Long} object.
+     * @param id a {@link java.lang.Long} object.
+     * @return a {@link org.springframework.hateoas.Resource} object.
+     */
     @GetMapping(value = "/contacts/{contactId}/phones/{id}")
     public Resource<Phone> getPhone(@PathVariable Long contactId, @PathVariable Long id) {
         Phone phone = phoneService.getById(id);
@@ -46,11 +71,25 @@ public class PhoneRestController {
                 linkTo(methodOn(PhoneRestController.class).getPhones(contactId)).withRel("Phones"));
     }
 
+    /**
+     * <p>addPhone.</p>
+     *
+     * @param id a {@link java.lang.Long} object.
+     * @param phone a {@link com.kenect.kenectspringtest.model.Phone} object.
+     * @return a {@link org.springframework.hateoas.Resource} object.
+     */
     @PostMapping(value = "/contacts/{id}/phones")
     public Resource<Phone> addPhone(@PathVariable Long id, @RequestBody Phone phone) {
         return getPhoneResource(id, phone);
     }
 
+    /**
+     * <p>updatePhone.</p>
+     *
+     * @param id a {@link java.lang.Long} object.
+     * @param phone a {@link com.kenect.kenectspringtest.model.Phone} object.
+     * @return a {@link org.springframework.hateoas.Resource} object.
+     */
     @PutMapping(value = "/contacts/{id}/phones")
     public Resource<Phone> updatePhone(@PathVariable Long id, @RequestBody Phone phone) {
         return getPhoneResource(id, phone);
@@ -65,6 +104,11 @@ public class PhoneRestController {
                 linkTo(methodOn(PhoneRestController.class).getPhones(id)).withRel("phones"));
     }
 
+    /**
+     * <p>deletePhone.</p>
+     *
+     * @param phoneId a {@link java.lang.Long} object.
+     */
     @DeleteMapping(value = "/phones/{phoneId}")
     public void deletePhone(@PathVariable Long phoneId) {
         phoneService.delete(phoneId);

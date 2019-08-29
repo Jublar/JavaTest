@@ -15,6 +15,12 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.core.DummyInvocationUtils.methodOn;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+/**
+ * <p>AddressRestController class.</p>
+ *
+ * @author Jublar Garcia
+ * @version 1.0
+ */
 @RestController
 public class AddressRestController {
 
@@ -22,11 +28,23 @@ public class AddressRestController {
     private IAddressElementService<Address, Long> addressService;
 
     @Autowired
+    /**
+     * <p>Constructor for AddressRestController.</p>
+     *
+     * @param contactService a {@link com.kenect.kenectspringtest.service.IContactService} object.
+     * @param addressService a {@link com.kenect.kenectspringtest.service.IAddressElementService} object.
+     */
     public AddressRestController(IContactService contactService, IAddressElementService<Address, Long> addressService) {
         this.contactService = contactService;
         this.addressService = addressService;
     }
 
+    /**
+     * <p>getAddresses.</p>
+     *
+     * @param id a {@link java.lang.Long} object.
+     * @return a {@link org.springframework.hateoas.Resources} object.
+     */
     @GetMapping(value = "/contacts/{id}/addresses")
     public Resources<Resource<Address>> getAddresses(@PathVariable Long id) {
         List<Resource<Address>> addresses = addressService.getAllElements(id).stream()
@@ -38,6 +56,13 @@ public class AddressRestController {
                 linkTo(methodOn(AddressRestController.class).getAddresses(id)).withSelfRel());
     }
 
+    /**
+     * <p>getAddress.</p>
+     *
+     * @param contactId a {@link java.lang.Long} object.
+     * @param id a {@link java.lang.Long} object.
+     * @return a {@link org.springframework.hateoas.Resource} object.
+     */
     @GetMapping(value = "/contacts/{contactId}/addresses/{id}")
     public Resource<Address> getAddress(@PathVariable Long contactId, @PathVariable Long id) {
         Address address = addressService.getById(id);
@@ -46,11 +71,25 @@ public class AddressRestController {
                 linkTo(methodOn(AddressRestController.class).getAddresses(contactId)).withRel("addresses"));
     }
 
+    /**
+     * <p>addAddress.</p>
+     *
+     * @param id a {@link java.lang.Long} object.
+     * @param address a {@link com.kenect.kenectspringtest.model.Address} object.
+     * @return a {@link org.springframework.hateoas.Resource} object.
+     */
     @PostMapping(value = "/contacts/{id}/addresses")
     public Resource<Address> addAddress(@PathVariable Long id, @RequestBody Address address) {
         return getAddressResource(id, address);
     }
 
+    /**
+     * <p>updateAddress.</p>
+     *
+     * @param id a {@link java.lang.Long} object.
+     * @param address a {@link com.kenect.kenectspringtest.model.Address} object.
+     * @return a {@link org.springframework.hateoas.Resource} object.
+     */
     @PutMapping(value = "/contacts/{id}/addresses")
     public Resource<Address> updateAddress(@PathVariable Long id, @RequestBody Address address) {
         return getAddressResource(id, address);
@@ -65,6 +104,11 @@ public class AddressRestController {
                 linkTo(methodOn(AddressRestController.class).getAddresses(id)).withRel("addresses"));
     }
 
+    /**
+     * <p>deleteAddress.</p>
+     *
+     * @param addressId a {@link java.lang.Long} object.
+     */
     @DeleteMapping(value = "/addresses/{addressId}")
     public void deleteAddress(@PathVariable Long addressId) {
         addressService.delete(addressId);
