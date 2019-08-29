@@ -1,16 +1,17 @@
 package com.kenect.kenectspringtest.controller;
 
 import com.kenect.kenectspringtest.AbstractTest;
-import com.kenect.kenectspringtest.model.Contact;
-
-import com.kenect.kenectspringtest.testmodel.Contacts;
 import com.kenect.kenectspringtest.dto.SearchPayLoad;
+import com.kenect.kenectspringtest.model.Contact;
+import com.kenect.kenectspringtest.testmodel.Contacts;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ContactRestControllerTest extends AbstractTest {
 
@@ -63,6 +64,29 @@ public class ContactRestControllerTest extends AbstractTest {
         String content = mvcResult.getResponse().getContentAsString();
         contactDB = super.mapFromJson(content, Contact.class);
         assertTrue(contactDB != null);
+
+        String deleteUri = String.format("/contacts/%d", contactDB.getId());
+        mockMvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
+    }
+
+    @Test
+    public void getContactNotFound() throws Exception {
+        String postContactsUri = "/contacts";
+        Contact newContact = new Contact();
+        newContact.setName("Jhon Smith");
+        String inputJson = super.mapToJson(newContact);
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(postContactsUri)
+                .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+        Contact contactDB = super.mapFromJson(mvcResult.getResponse().getContentAsString(), Contact.class);
+
+        String getContactsUri = String.format("/contacts/%d", contactDB.getId() + 1);
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(getContactsUri)
+                .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(404, status);
+        String content = mvcResult.getResponse().getContentAsString();
+        assertEquals(String.format("There is no element with id: %d" , contactDB.getId() + 1), content);
 
         String deleteUri = String.format("/contacts/%d", contactDB.getId());
         mockMvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
