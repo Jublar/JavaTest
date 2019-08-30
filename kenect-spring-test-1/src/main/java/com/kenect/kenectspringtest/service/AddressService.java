@@ -17,8 +17,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AddressService extends BaseService<Address, Long> {
 
-    private AddressRepository addressRepository;
-
     /**
      * <p>Constructor for AddressService.</p>
      *
