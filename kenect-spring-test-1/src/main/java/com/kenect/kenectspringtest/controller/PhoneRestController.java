@@ -4,7 +4,6 @@ import com.kenect.kenectspringtest.model.Contact;
 import com.kenect.kenectspringtest.model.Phone;
 import com.kenect.kenectspringtest.service.IAddressElementService;
 import com.kenect.kenectspringtest.service.IContactService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
@@ -24,7 +23,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
  * @version 1.0
  */
 @RestController
-@Api(description = "Operations to manage phones in Contact Management System")
 public class PhoneRestController {
 
     private IContactService contactService;

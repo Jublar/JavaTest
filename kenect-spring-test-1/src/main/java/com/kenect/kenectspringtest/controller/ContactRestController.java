@@ -3,7 +3,6 @@ package com.kenect.kenectspringtest.controller;
 import com.kenect.kenectspringtest.dto.SearchPayLoad;
 import com.kenect.kenectspringtest.model.Contact;
 import com.kenect.kenectspringtest.service.IContactService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
@@ -25,7 +24,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
  * @version 1.0
  */
 @RestController
-@Api(description = "Operations to manage contacts in Contact Management System")
 public class ContactRestController {
 
     private IContactService contactService;
