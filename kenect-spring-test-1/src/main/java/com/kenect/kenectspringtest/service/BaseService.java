@@ -2,7 +2,6 @@ package com.kenect.kenectspringtest.service;
 
 import com.kenect.kenectspringtest.constants.Constants;
 import com.kenect.kenectspringtest.exception.ElementNotFoundException;
-import com.kenect.kenectspringtest.exception.InvalidInputException;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -41,8 +40,6 @@ public class BaseService<T, ID> implements IAddressElementService<T, ID> {
     @Override
     public void delete(ID id) {
         T element = this.getById(id);
-        if(element == null)
-            throw new InvalidInputException(String.format(Constants.MSG_ELEMENT_DOES_NOT_EXISTS, element.getClass(), id));
         repository.delete(element);
     }
 
