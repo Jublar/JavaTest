@@ -11,8 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ContactRestControllerTest extends AbstractTest {
 
@@ -40,7 +39,7 @@ public class ContactRestControllerTest extends AbstractTest {
         assertEquals(200, status);
         String content = mvcResult.getResponse().getContentAsString();
         Contacts contacts = super.mapFromJson(content, Contacts.class);
-        assertTrue(contacts.getContent().length > 0);
+        assertTrue(contacts._embedded.contactList.length > 0);
 
         String deleteUri = String.format("/contacts/%d", contactDB.getId());
         mockMvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
@@ -114,7 +113,7 @@ public class ContactRestControllerTest extends AbstractTest {
         assertEquals(200, status);
         String content = mvcResult.getResponse().getContentAsString();
         Contacts contacts = super.mapFromJson(content, Contacts.class);
-        assertTrue(contacts.getContent().length > 0);
+        assertTrue(contacts._embedded.contactList.length > 0);
 
         String deleteUri = String.format("/contacts/%d", contactDB.getId());
         mockMvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
@@ -168,7 +167,7 @@ public class ContactRestControllerTest extends AbstractTest {
         assertEquals(200, status);
         content = mvcResult.getResponse().getContentAsString();
         Contacts contacts = super.mapFromJson(content, Contacts.class);
-        assertTrue(contacts.getContent().length > 0);
+        assertTrue(contacts._embedded.contactList.length > 0);
 
         String deleteUri = String.format("/contacts/%d", contactDB.getId());
         SearchPayLoad search = new SearchPayLoad();
@@ -182,6 +181,6 @@ public class ContactRestControllerTest extends AbstractTest {
         assertEquals(200, status);
         content = mvcResult.getResponse().getContentAsString();
         contacts = super.mapFromJson(content, Contacts.class);
-        assertTrue(contacts.getContent().length == 0);
+        assertNull(contacts._embedded);
     }
 }

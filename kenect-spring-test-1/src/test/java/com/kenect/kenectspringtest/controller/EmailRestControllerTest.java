@@ -10,8 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class EmailRestControllerTest extends AbstractTest {
     @Override
@@ -46,7 +45,7 @@ public class EmailRestControllerTest extends AbstractTest {
 
         String content = mvcResult.getResponse().getContentAsString();
         Emails contacts = super.mapFromJson(content, Emails.class);
-        assertTrue(contacts.getContent().length > 0);
+        assertTrue(contacts._embedded.emailAddressList.length > 0);
 
         mockMvc.perform(MockMvcRequestBuilders.delete(String.format("%s/%s", postContactsUri, contactDB.getId()))).andReturn();
     }
@@ -151,6 +150,6 @@ public class EmailRestControllerTest extends AbstractTest {
 
         String content = mvcResult.getResponse().getContentAsString();
         Emails contentDB = super.mapFromJson(content, Emails.class);
-        assertEquals(contentDB.getContent().length, 0);
+        assertNull(contentDB._embedded);
     }
 }
