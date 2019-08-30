@@ -26,13 +26,15 @@ public abstract class AbstractTest {
     private WebApplicationContext webApplicationContext;
 
     protected void initMock() {
-        if(mockMvc == null)
+        if (mockMvc == null)
             mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
+
     protected String mapToJson(Object obj) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(obj);
     }
+
     protected <T> T mapFromJson(String json, Class<T> clazz)
             throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
