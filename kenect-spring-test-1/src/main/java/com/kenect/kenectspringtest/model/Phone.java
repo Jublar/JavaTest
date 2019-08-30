@@ -22,7 +22,7 @@ public class Phone {
     /**
      * <p>Getter for the field <code>id</code>.</p>
      *
-     * @return a {@link java.lang.Long} object.
+     * @return the phone id.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class Phone {
     /**
      * <p>Setter for the field <code>id</code>.</p>
      *
-     * @param id a {@link java.lang.Long} object.
+     * @param id of the phone to be set.
      */
     public void setId(Long id) {
         this.id = id;
@@ -42,7 +42,7 @@ public class Phone {
     /**
      * <p>Setter for the field <code>number</code>.</p>
      *
-     * @param number a {@link java.lang.String} object.
+     * @param number of the phone to be set.
      */
     public void setNumber(String number) {
         this.number = number;
@@ -51,7 +51,7 @@ public class Phone {
     /**
      * <p>Getter for the field <code>number</code>.</p>
      *
-     * @return a {@link java.lang.String} object.
+     * @return the phone number.
      */
     public String getNumber() {
         return number;
@@ -60,7 +60,7 @@ public class Phone {
     /**
      * <p>Getter for the field <code>type</code>.</p>
      *
-     * @return a {@link java.lang.String} object.
+     * @return the phone type.
      */
     public String getType() {
         return type;
@@ -69,7 +69,7 @@ public class Phone {
     /**
      * <p>Setter for the field <code>type</code>.</p>
      *
-     * @param type a {@link java.lang.String} object.
+     * @param type of the phone to be set.
      */
     public void setType(String type) {
         this.type = type;
@@ -78,7 +78,7 @@ public class Phone {
     /**
      * <p>Getter for the field <code>contact</code>.</p>
      *
-     * @return a {@link com.kenect.kenectspringtest.model.Contact} object.
+     * @return the phone contact object.
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contact_id")
@@ -90,7 +90,7 @@ public class Phone {
     /**
      * <p>Setter for the field <code>contact</code>.</p>
      *
-     * @param contact a {@link com.kenect.kenectspringtest.model.Contact} object.
+     * @param contact of the phone to be set.
      */
     public void setContact(Contact contact) {
         this.contact = contact;
@@ -99,7 +99,7 @@ public class Phone {
     /**
      * <p>Getter for the field <code>version</code>.</p>
      *
-     * @return a int.
+     * @return version number.
      */
     @Version
     public int getVersion() {
@@ -109,7 +109,7 @@ public class Phone {
     /**
      * <p>Setter for the field <code>version</code>.</p>
      *
-     * @param version a int.
+     * @param version sets the version number.
      */
     public void setVersion(int version) {
         this.version = version;

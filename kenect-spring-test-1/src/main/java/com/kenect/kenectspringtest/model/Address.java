@@ -24,7 +24,7 @@ public class Address {
     /**
      * <p>Getter for the field <code>id</code>.</p>
      *
-     * @return a {@link java.lang.Long} object.
+     * @return the address id.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,7 @@ public class Address {
     /**
      * <p>Setter for the field <code>id</code>.</p>
      *
-     * @param id a {@link java.lang.Long} object.
+     * @param id of the address to be set.
      */
     public void setId(Long id) {
         this.id = id;
@@ -44,7 +44,7 @@ public class Address {
     /**
      * <p>Getter for the field <code>contact</code>.</p>
      *
-     * @return a {@link com.kenect.kenectspringtest.model.Contact} object.
+     * @return the address contact.
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contact_id")
@@ -56,7 +56,7 @@ public class Address {
     /**
      * <p>Setter for the field <code>contact</code>.</p>
      *
-     * @param contact a {@link com.kenect.kenectspringtest.model.Contact} object.
+     * @param contact of the address to be set.
      */
     public void setContact(Contact contact) {
         this.contact = contact;
@@ -65,7 +65,7 @@ public class Address {
     /**
      * <p>Getter for the field <code>country</code>.</p>
      *
-     * @return a {@link java.lang.String} object.
+     * @return the address country.
      */
     public String getCountry() {
         return country;
@@ -74,7 +74,7 @@ public class Address {
     /**
      * <p>Setter for the field <code>country</code>.</p>
      *
-     * @param country a {@link java.lang.String} object.
+     * @param country of the address to be set.
      */
     public void setCountry(String country) {
         this.country = country;
@@ -83,7 +83,7 @@ public class Address {
     /**
      * <p>Getter for the field <code>city</code>.</p>
      *
-     * @return a {@link java.lang.String} object.
+     * @return the address city.
      */
     public String getCity() {
         return city;
@@ -92,7 +92,7 @@ public class Address {
     /**
      * <p>Setter for the field <code>city</code>.</p>
      *
-     * @param city a {@link java.lang.String} object.
+     * @param city of the address to be set.
      */
     public void setCity(String city) {
         this.city = city;
@@ -101,7 +101,7 @@ public class Address {
     /**
      * <p>Getter for the field <code>street</code>.</p>
      *
-     * @return a {@link java.lang.String} object.
+     * @return the address street.
      */
     public String getStreet() {
         return street;
@@ -110,7 +110,7 @@ public class Address {
     /**
      * <p>Setter for the field <code>street</code>.</p>
      *
-     * @param street a {@link java.lang.String} object.
+     * @param street of the address to be set.
      */
     public void setStreet(String street) {
         this.street = street;
@@ -119,7 +119,7 @@ public class Address {
     /**
      * <p>Getter for the field <code>zipCode</code>.</p>
      *
-     * @return a {@link java.lang.String} object.
+     * @return the address zip code.
      */
     public String getZipCode() {
         return zipCode;
@@ -128,7 +128,7 @@ public class Address {
     /**
      * <p>Setter for the field <code>zipCode</code>.</p>
      *
-     * @param zipCode a {@link java.lang.String} object.
+     * @param zipCode of the address to be set.
      */
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
@@ -137,7 +137,7 @@ public class Address {
     /**
      * <p>Getter for the field <code>version</code>.</p>
      *
-     * @return a int.
+     * @return version number.
      */
     @Version
     public int getVersion() {
@@ -147,7 +147,7 @@ public class Address {
     /**
      * <p>Setter for the field <code>version</code>.</p>
      *
-     * @param version a int.
+     * @param version sets the version number.
      */
     public void setVersion(int version) {
         this.version = version;

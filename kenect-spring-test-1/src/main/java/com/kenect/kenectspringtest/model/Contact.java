@@ -29,7 +29,7 @@ public class Contact {
     /**
      * <p>Getter for the field <code>id</code>.</p>
      *
-     * @return a {@link java.lang.Long} object.
+     * @return the id of the contact.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +40,7 @@ public class Contact {
     /**
      * <p>Setter for the field <code>id</code>.</p>
      *
-     * @param id a {@link java.lang.Long} object.
+     * @param id Id of the contact.
      */
     public void setId(Long id) {
         this.id = id;
@@ -49,7 +49,7 @@ public class Contact {
     /**
      * <p>Getter for the field <code>name</code>.</p>
      *
-     * @return a {@link java.lang.String} object.
+     * @return the name of the contact.
      */
     public String getName() {
         return name;
@@ -58,7 +58,7 @@ public class Contact {
     /**
      * <p>Setter for the field <code>name</code>.</p>
      *
-     * @param name a {@link java.lang.String} object.
+     * @param name of the contact.
      */
     public void setName(String name) {
         this.name = name;
@@ -67,7 +67,7 @@ public class Contact {
     /**
      * <p>Getter for the field <code>emails</code>.</p>
      *
-     * @return a {@link java.util.List} object.
+     * @return all contact emails.
      */
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("contact")
@@ -78,7 +78,7 @@ public class Contact {
     /**
      * <p>Setter for the field <code>emails</code>.</p>
      *
-     * @param emails a {@link java.util.List} object.
+     * @param emails of the contact to set.
      */
     public void setEmails(List<EmailAddress> emails) {
         this.emails = emails;
@@ -87,7 +87,7 @@ public class Contact {
     /**
      * <p>Getter for the field <code>phones</code>.</p>
      *
-     * @return a {@link java.util.List} object.
+     * @return all contact phones.
      */
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("contact")
@@ -98,7 +98,7 @@ public class Contact {
     /**
      * <p>Setter for the field <code>phones</code>.</p>
      *
-     * @param phones a {@link java.util.List} object.
+     * @param phones of the contact to set.
      */
     public void setPhones(List<Phone> phones) {
         this.phones = phones;
@@ -107,7 +107,7 @@ public class Contact {
     /**
      * <p>Getter for the field <code>addresses</code>.</p>
      *
-     * @return a {@link java.util.List} object.
+     * @return all contact addresses.
      */
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("contact")
@@ -118,7 +118,7 @@ public class Contact {
     /**
      * <p>Setter for the field <code>addresses</code>.</p>
      *
-     * @param addresses a {@link java.util.List} object.
+     * @param addresses of the contact to set.
      */
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
@@ -127,7 +127,7 @@ public class Contact {
     /**
      * <p>Getter for the field <code>version</code>.</p>
      *
-     * @return a int.
+     * @return version number.
      */
     @Version
     public int getVersion() {
@@ -137,7 +137,7 @@ public class Contact {
     /**
      * <p>Setter for the field <code>version</code>.</p>
      *
-     * @param version a int.
+     * @param version sets the version number.
      */
     public void setVersion(int version) {
         this.version = version;

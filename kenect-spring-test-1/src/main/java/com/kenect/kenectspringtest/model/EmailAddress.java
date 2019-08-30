@@ -21,7 +21,7 @@ public class EmailAddress {
     /**
      * <p>Getter for the field <code>id</code>.</p>
      *
-     * @return a {@link java.lang.Long} object.
+     * @return the email id.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class EmailAddress {
     /**
      * <p>Setter for the field <code>id</code>.</p>
      *
-     * @param id a {@link java.lang.Long} object.
+     * @param id of the email to be set.
      */
     public void setId(Long id) {
         this.id = id;
@@ -41,7 +41,7 @@ public class EmailAddress {
     /**
      * <p>Getter for the field <code>email</code>.</p>
      *
-     * @return a {@link java.lang.String} object.
+     * @return the email address.
      */
     public String getEmail() {
         return email;
@@ -50,7 +50,7 @@ public class EmailAddress {
     /**
      * <p>Setter for the field <code>email</code>.</p>
      *
-     * @param email a {@link java.lang.String} object.
+     * @param email address to be set.
      */
     public void setEmail(String email) {
         this.email = email;
@@ -59,7 +59,7 @@ public class EmailAddress {
     /**
      * <p>Getter for the field <code>contact</code>.</p>
      *
-     * @return a {@link com.kenect.kenectspringtest.model.Contact} object.
+     * @return the email contact object.
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="contact_id")
@@ -71,7 +71,7 @@ public class EmailAddress {
     /**
      * <p>Setter for the field <code>contact</code>.</p>
      *
-     * @param contact a {@link com.kenect.kenectspringtest.model.Contact} object.
+     * @param contact of the email to be set.
      */
     public void setContact(Contact contact) {
         this.contact = contact;
@@ -80,7 +80,7 @@ public class EmailAddress {
     /**
      * <p>Getter for the field <code>version</code>.</p>
      *
-     * @return a int.
+     * @return version number.
      */
     @Version
     public int getVersion() {
@@ -90,7 +90,7 @@ public class EmailAddress {
     /**
      * <p>Setter for the field <code>version</code>.</p>
      *
-     * @param version a int.
+     * @param version sets the version number.
      */
     public void setVersion(int version) {
         this.version = version;
