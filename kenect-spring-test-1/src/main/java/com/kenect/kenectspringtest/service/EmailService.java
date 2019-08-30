@@ -50,11 +50,8 @@ public class EmailService extends BaseService<EmailAddress, Long> {
      * @param email a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public static boolean validateEmailAddress(String email) {
+    private static boolean validateEmailAddress(String email) {
         Matcher matcher = emailPattern.matcher(email);
-        if (matcher.matches()) {
-            return true;
-        }
-        return false;
+        return matcher.matches();
     }
 }

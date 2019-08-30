@@ -50,12 +50,9 @@ public class PhoneService extends BaseService<Phone, Long> {
      * @param phone a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public static boolean validatePhone(String phone) {
+    private static boolean validatePhone(String phone) {
         Matcher matcher = phonePattern.matcher(phone);
-        if (matcher.matches()) {
-            return true;
-        }
-        return false;
+        return matcher.matches();
     }
 }
 
