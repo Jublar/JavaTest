@@ -58,7 +58,7 @@ public class AddressServiceTest {
         Optional<Address> optionalAddress = Optional.of(mock);
         Mockito.when(addressRepository.findById(1L)).thenReturn(optionalAddress);
         Address address = addressService.getById(1L);
-        assertEquals(address.getStreet(), mock.getStreet());
+        assertEquals(address.toString(), mock.toString());
     }
 
     @Test(expected = ElementNotFoundException.class)
@@ -67,6 +67,19 @@ public class AddressServiceTest {
         Optional<Address> optionalAddress = Optional.of(mock);
         Mockito.when(addressRepository.findById(1L)).thenReturn(optionalAddress);
         addressService.getById(2L);
+    }
+
+    @Test
+    public void delete() {
+        Address mock = mockAddress();
+        Optional<Address> optionalAddress = Optional.of(mock);
+        Mockito.when(addressRepository.findById(1L)).thenReturn(optionalAddress);
+        addressService.delete(1L);
+    }
+
+    @Test(expected = ElementNotFoundException.class)
+    public void deleteNotFound() {
+        addressService.delete(2L);
     }
 
     private List<Address> mockListAddress() {

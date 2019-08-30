@@ -31,7 +31,7 @@ public class PhoneServiceTest {
         Phone phone = mockPhone();
         Mockito.when(phoneService.save(phone)).thenReturn(phone);
         Phone phoneDB = phoneService.save(phone);
-        assertEquals(phone.getNumber(), phoneDB.getNumber());
+        assertEquals(phone.toString(), phoneDB.toString());
     }
 
     @Test(expected = InvalidInputException.class)

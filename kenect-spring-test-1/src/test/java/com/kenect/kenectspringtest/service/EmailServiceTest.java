@@ -31,7 +31,7 @@ public class EmailServiceTest {
         EmailAddress emailAddress = mockEmailAddress();
         Mockito.when(emailService.save(emailAddress)).thenReturn(emailAddress);
         EmailAddress emailAddressDB = emailService.save(emailAddress);
-        assertEquals(emailAddress.getEmail(), emailAddressDB.getEmail());
+        assertEquals(emailAddress.toString(), emailAddressDB.toString());
     }
 
     @Test(expected = InvalidInputException.class)
