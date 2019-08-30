@@ -1,5 +1,6 @@
 package com.kenect.kenectspringtest.service;
 
+import com.kenect.kenectspringtest.exception.ElementNotFoundException;
 import com.kenect.kenectspringtest.exception.InvalidInputException;
 import com.kenect.kenectspringtest.model.Contact;
 import com.kenect.kenectspringtest.repository.ContactRepository;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
@@ -42,7 +44,6 @@ public class ContactServiceTest {
         contactService.save(c);
     }
 
-
     @Test
     public void getAllContacts() {
         Mockito.when(contactRepository.findAll()).thenReturn(mockListContact());
@@ -50,7 +51,31 @@ public class ContactServiceTest {
         assertEquals(contactList.size(), 1);
     }
 
-    private Iterable<Contact> mockListContact() {
+    @Test
+    public void getAllContactsQuery() {
+        Mockito.when(contactRepository.findByQuery(Mockito.anyString())).thenReturn(mockListContact());
+        List<Contact> contactList = contactService.getAllContacts("morris");
+        assertEquals(contactList.size(), 1);
+    }
+
+    @Test
+    public void getById() {
+        Contact mock = mockContact();
+        Optional<Contact> optionalContact = Optional.of(mock);
+        Mockito.when(contactRepository.findById(1L)).thenReturn(optionalContact);
+        Contact contact = contactService.getById(1L);
+        assertEquals(contact.getName(), mock.getName());
+    }
+
+    @Test(expected = ElementNotFoundException.class)
+    public void getByIdNotFound() {
+        Contact mock = mockContact();
+        Optional<Contact> optionalContact = Optional.of(mock);
+        Mockito.when(contactRepository.findById(1L)).thenReturn(optionalContact);
+        contactService.getById(2L);
+    }
+
+    private List<Contact> mockListContact() {
         List<Contact> contacts = new ArrayList<>();
         contacts.add(new Contact());
         return contacts;
