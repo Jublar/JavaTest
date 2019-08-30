@@ -2,8 +2,10 @@ package com.kenect.kenectspringtest.service;
 
 import com.kenect.kenectspringtest.constants.Constants;
 import com.kenect.kenectspringtest.exception.ElementNotFoundException;
+import com.kenect.kenectspringtest.exception.InvalidInputException;
 import com.kenect.kenectspringtest.model.Contact;
 import com.kenect.kenectspringtest.repository.ContactRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +57,10 @@ public class ContactService implements IContactService {
     @Override
     @Transactional
     public Contact save(Contact contact) {
+        if (contact == null)
+            throw new InvalidInputException(Constants.MSG_CONTACT_OBJECT_REQUIRED);
+        if (contact.getName() == null || StringUtils.isEmpty(contact.getName()))
+            throw new InvalidInputException(Constants.MSG_NAME_REQUIRED);
         return contactRepository.save(contact);
     }
 
