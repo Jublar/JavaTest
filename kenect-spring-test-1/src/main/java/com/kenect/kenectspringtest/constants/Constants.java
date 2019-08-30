@@ -8,9 +8,9 @@ package com.kenect.kenectspringtest.constants;
  */
 public class Constants {
     /** Constant <code>MSG_NO_ELEMENT="There is no element with id: %d"</code> */
-    public static final String MSG_NO_ELEMENT = "There is no element with id: %d.";
+    public static final String MSG_NO_ELEMENT = "There is no element with id: %s.";
     /** Constant <code>MSG_ELEMENT_DOES_NOT_EXISTS="%s with id %d does not exists."</code> */
-    public static final String MSG_ELEMENT_DOES_NOT_EXISTS = "%s with id %d does not exists.";
+    public static final String MSG_ELEMENT_DOES_NOT_EXISTS = "%s with id %s does not exists.";
     /** Constant <code>MSG_EMAIL_OBJECT_REQUIRED="Email object is required."</code> */
     public static final String MSG_EMAIL_OBJECT_REQUIRED = "Email object is required.";
     /** Constant <code>MSG_EMAIL_REQUIRED="Email is required."</code> */
