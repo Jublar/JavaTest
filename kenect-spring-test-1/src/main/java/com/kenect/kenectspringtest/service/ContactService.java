@@ -43,7 +43,7 @@ public class ContactService implements IContactService {
     /** {@inheritDoc} */
     @Override
     public List<Contact> getAllContacts(String query) {
-        return (List<Contact>) contactRepository.findByQuery(query);
+        return contactRepository.findByQuery(query);
     }
 
     /** {@inheritDoc} */
