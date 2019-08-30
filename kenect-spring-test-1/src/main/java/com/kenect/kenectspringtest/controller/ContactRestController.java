@@ -3,6 +3,8 @@ package com.kenect.kenectspringtest.controller;
 import com.kenect.kenectspringtest.dto.SearchPayLoad;
 import com.kenect.kenectspringtest.model.Contact;
 import com.kenect.kenectspringtest.service.IContactService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
@@ -23,6 +25,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
  * @version 1.0
  */
 @RestController
+@Api(description = "Operations to manage contacts in Contact Management System")
 public class ContactRestController {
 
     private IContactService contactService;
@@ -43,6 +46,7 @@ public class ContactRestController {
      * @return a {@link org.springframework.hateoas.Resources} object.
      */
     @GetMapping(value = "/contacts")
+    @ApiOperation(value = "View a list of available contacts", response = Resources.class)
     public Resources<Resource<Contact>> contacts() {
         List<Resource<Contact>> contacts = contactService.getAllContacts().stream()
                 .map(contact -> new Resource<>(contact,
@@ -63,6 +67,7 @@ public class ContactRestController {
      * @return a {@link org.springframework.hateoas.Resource} object.
      */
     @GetMapping("/contacts/{id}")
+    @ApiOperation(value = "Retrieve a contact by id", response = Resource.class)
     public Resource<Contact> contactById(@PathVariable Long id) {
         Contact contact = contactService.getById(id);
         return new Resource<>(contact,
@@ -80,6 +85,7 @@ public class ContactRestController {
      * @return a {@link org.springframework.hateoas.Resources} object.
      */
     @PostMapping(value = "/contacts/search")
+    @ApiOperation(value = "Search contacts by name, email, phone, address", response = Resources.class)
     public Resources<Resource<Contact>> contacts(@RequestBody SearchPayLoad search) {
         List<Resource<Contact>> contacts = contactService.getAllContacts(search.getQuery()).stream()
                 .map(contact -> new Resource<>(contact,
@@ -97,6 +103,7 @@ public class ContactRestController {
      * @return a {@link org.springframework.hateoas.Resource} object.
      */
     @PostMapping(value = "/contacts")
+    @ApiOperation(value = "Method to create a new contact", response = Resource.class)
     public Resource<Contact> saveContact(@RequestBody Contact contact) {
         Contact contactDB = contactService.save(contact);
         return new Resource<>(contactDB,
@@ -111,6 +118,7 @@ public class ContactRestController {
      * @return a {@link org.springframework.hateoas.Resource} object.
      */
     @PutMapping(value = "/contacts")
+    @ApiOperation(value = "Method to update a contact", response = Resource.class)
     public Resource<Contact> updateContact(@RequestBody Contact contact) {
         Contact contactDB = contactService.save(contact);
         return new Resource<>(contactDB,
@@ -125,6 +133,7 @@ public class ContactRestController {
      * @return a {@link org.springframework.http.ResponseEntity} object.
      */
     @DeleteMapping(value = "/contacts/{id}")
+    @ApiOperation(value = "Method to delete a contact", response = ResponseEntity.class)
     public ResponseEntity<?> delete(@PathVariable Long id) {
         contactService.delete(id);
         return ResponseEntity.noContent().build();

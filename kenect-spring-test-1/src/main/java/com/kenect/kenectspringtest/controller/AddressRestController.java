@@ -4,6 +4,8 @@ import com.kenect.kenectspringtest.model.Address;
 import com.kenect.kenectspringtest.model.Contact;
 import com.kenect.kenectspringtest.service.IAddressElementService;
 import com.kenect.kenectspringtest.service.IContactService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
@@ -22,6 +24,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
  * @version 1.0
  */
 @RestController
+@Api(description = "Operations to manage adresses in Contact Management System")
 public class AddressRestController {
 
     private IContactService contactService;
@@ -46,6 +49,7 @@ public class AddressRestController {
      * @return a {@link org.springframework.hateoas.Resources} object.
      */
     @GetMapping(value = "/contacts/{id}/addresses")
+    @ApiOperation(value = "View a list of all addresses of a contact", response = Resources.class)
     public Resources<Resource<Address>> getAddresses(@PathVariable Long id) {
         List<Resource<Address>> addresses = addressService.getAllElements(id).stream()
                 .map(address -> new Resource<>(address,
@@ -64,6 +68,7 @@ public class AddressRestController {
      * @return a {@link org.springframework.hateoas.Resource} object.
      */
     @GetMapping(value = "/contacts/{contactId}/addresses/{id}")
+    @ApiOperation(value = "Retrieves an address by id of a contact", response = Resource.class)
     public Resource<Address> getAddress(@PathVariable Long contactId, @PathVariable Long id) {
         Address address = addressService.getById(id);
         return new Resource<>(address,
@@ -79,6 +84,7 @@ public class AddressRestController {
      * @return a {@link org.springframework.hateoas.Resource} object.
      */
     @PostMapping(value = "/contacts/{id}/addresses")
+    @ApiOperation(value = "Adds an address to a contact", response = Resource.class)
     public Resource<Address> addAddress(@PathVariable Long id, @RequestBody Address address) {
         return getAddressResource(id, address);
     }
@@ -91,6 +97,7 @@ public class AddressRestController {
      * @return a {@link org.springframework.hateoas.Resource} object.
      */
     @PutMapping(value = "/contacts/{id}/addresses")
+    @ApiOperation(value = "Updates an address of a contact", response = Resource.class)
     public Resource<Address> updateAddress(@PathVariable Long id, @RequestBody Address address) {
         return getAddressResource(id, address);
     }
@@ -110,6 +117,7 @@ public class AddressRestController {
      * @param addressId a {@link java.lang.Long} object.
      */
     @DeleteMapping(value = "/addresses/{addressId}")
+    @ApiOperation(value = "Deletes an address by id")
     public void deleteAddress(@PathVariable Long addressId) {
         addressService.delete(addressId);
     }

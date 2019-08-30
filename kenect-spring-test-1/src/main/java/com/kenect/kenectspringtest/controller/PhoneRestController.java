@@ -4,6 +4,8 @@ import com.kenect.kenectspringtest.model.Contact;
 import com.kenect.kenectspringtest.model.Phone;
 import com.kenect.kenectspringtest.service.IAddressElementService;
 import com.kenect.kenectspringtest.service.IContactService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
@@ -22,6 +24,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
  * @version 1.0
  */
 @RestController
+@Api(description = "Operations to manage phones in Contact Management System")
 public class PhoneRestController {
 
     private IContactService contactService;
@@ -46,6 +49,7 @@ public class PhoneRestController {
      * @return a {@link org.springframework.hateoas.Resources} object.
      */
     @GetMapping(value = "/contacts/{id}/phones")
+    @ApiOperation(value = "View a list of all phones of a contact", response = Resources.class)
     public Resources<Resource<Phone>> getPhones(@PathVariable Long id) {
         List<Resource<Phone>> phones = phoneService.getAllElements(id).stream()
                 .map(phone -> new Resource<>(phone,
@@ -64,6 +68,7 @@ public class PhoneRestController {
      * @return a {@link org.springframework.hateoas.Resource} object.
      */
     @GetMapping(value = "/contacts/{contactId}/phones/{id}")
+    @ApiOperation(value = "Retrieves a phone by id of a contact", response = Resource.class)
     public Resource<Phone> getPhone(@PathVariable Long contactId, @PathVariable Long id) {
         Phone phone = phoneService.getById(id);
         return new Resource<>(phone,
@@ -79,6 +84,7 @@ public class PhoneRestController {
      * @return a {@link org.springframework.hateoas.Resource} object.
      */
     @PostMapping(value = "/contacts/{id}/phones")
+    @ApiOperation(value = "Adds a phone to a contact", response = Resource.class)
     public Resource<Phone> addPhone(@PathVariable Long id, @RequestBody Phone phone) {
         return getPhoneResource(id, phone);
     }
@@ -91,6 +97,7 @@ public class PhoneRestController {
      * @return a {@link org.springframework.hateoas.Resource} object.
      */
     @PutMapping(value = "/contacts/{id}/phones")
+    @ApiOperation(value = "Updates a phone of a contact", response = Resource.class)
     public Resource<Phone> updatePhone(@PathVariable Long id, @RequestBody Phone phone) {
         return getPhoneResource(id, phone);
     }
@@ -110,6 +117,7 @@ public class PhoneRestController {
      * @param phoneId a {@link java.lang.Long} object.
      */
     @DeleteMapping(value = "/phones/{phoneId}")
+    @ApiOperation(value = "Deletes a phone by id")
     public void deletePhone(@PathVariable Long phoneId) {
         phoneService.delete(phoneId);
     }

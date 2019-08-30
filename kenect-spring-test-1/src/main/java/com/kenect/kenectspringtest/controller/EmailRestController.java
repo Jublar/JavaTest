@@ -4,6 +4,8 @@ import com.kenect.kenectspringtest.model.Contact;
 import com.kenect.kenectspringtest.model.EmailAddress;
 import com.kenect.kenectspringtest.service.IAddressElementService;
 import com.kenect.kenectspringtest.service.IContactService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
@@ -22,6 +24,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
  * @version 1.0
  */
 @RestController
+@Api(description = "Operations to manage emails in Contact Management System")
 public class EmailRestController {
 
     private IContactService contactService;
@@ -46,6 +49,7 @@ public class EmailRestController {
      * @return a {@link org.springframework.hateoas.Resources} object.
      */
     @GetMapping(value = "/contacts/{id}/emails")
+    @ApiOperation(value = "View a list of all emails of a contact", response = Resources.class)
     public Resources<Resource<EmailAddress>> getMails(@PathVariable Long id) {
         List<Resource<EmailAddress>> emails = emailService.getAllElements(id).stream()
                 .map(mail -> new Resource<>(mail,
@@ -64,6 +68,7 @@ public class EmailRestController {
      * @return a {@link org.springframework.hateoas.Resource} object.
      */
     @GetMapping(value = "/contacts/{contactId}/emails/{id}")
+    @ApiOperation(value = "Retrieves an email by id of a contact", response = Resource.class)
     public Resource<EmailAddress> getMail(@PathVariable Long contactId, @PathVariable Long id) {
         EmailAddress email = emailService.getById(id);
         return new Resource<>(email,
@@ -79,6 +84,7 @@ public class EmailRestController {
      * @return a {@link org.springframework.hateoas.Resource} object.
      */
     @PostMapping(value = "/contacts/{id}/emails")
+    @ApiOperation(value = "Adds an email to a contact", response = Resource.class)
     public Resource<EmailAddress> addEMail(@PathVariable Long id, @RequestBody EmailAddress email) {
         return getEmailAddressResource(id, email);
     }
@@ -91,6 +97,7 @@ public class EmailRestController {
      * @return a {@link org.springframework.hateoas.Resource} object.
      */
     @PutMapping(value = "/contacts/{id}/emails")
+    @ApiOperation(value = "Updates an email of a contact", response = Resource.class)
     public Resource<EmailAddress> updateEMail(@PathVariable Long id, @RequestBody EmailAddress email) {
         return getEmailAddressResource(id, email);
     }
@@ -110,6 +117,7 @@ public class EmailRestController {
      * @param emailId a {@link java.lang.Long} object.
      */
     @DeleteMapping(value = "/emails/{emailId}")
+    @ApiOperation(value = "Deletes an email by id")
     public void deleteEMail(@PathVariable Long emailId) {
         emailService.delete(emailId);
     }
