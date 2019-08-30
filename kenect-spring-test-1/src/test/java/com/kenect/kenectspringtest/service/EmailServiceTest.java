@@ -40,13 +40,20 @@ public class EmailServiceTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void saveInputExceptionName() {
+    public void saveInputExceptionEmail() {
         EmailAddress emailAddress = new EmailAddress();
         emailService.save(emailAddress);
     }
 
+    @Test(expected = InvalidInputException.class)
+    public void saveInputExceptionEmailFormat() {
+        EmailAddress emailAddress = new EmailAddress();
+        emailAddress.setEmail("not valid mail");
+        emailService.save(emailAddress);
+    }
+
     @Test
-    public void getAllAddresses() {
+    public void getAllMails() {
         Mockito.when(emailRepository.findAll()).thenReturn(mockListEmailAddress());
         List<EmailAddress> emailAddressList = emailService.getAllElements(1L);
         assertEquals(emailAddressList.size(), 1);
